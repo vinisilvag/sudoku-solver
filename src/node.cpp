@@ -1,10 +1,13 @@
 #include "node.hpp"
 
-Node::Node(State state, int depth = 0)
+Node::Node(State state, int depth = 0, int cost = 0)
 {
   this->state = state;
   this->depth = depth;
+  this->cost = cost;
 }
+
+bool Node::operator<(const Node &node) { return this->cost < node.cost; }
 
 bool Node::goal()
 {
@@ -68,7 +71,7 @@ std::vector<Node *> Node::expand()
 
   for (int value : possibilities) {
     auto [i, j] = coords;
-    Node *child = new Node(this->state);
+    Node *child = new Node(this->state, this->depth + 1, 0);
     child->state[i][j] = value;
     children.push_back(child);
   }

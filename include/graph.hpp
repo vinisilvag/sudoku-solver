@@ -12,6 +12,8 @@ class Graph
 
   Graph(State);
   std::tuple<State, int> breadth_first_search();
+  std::tuple<State, int> iterative_deepening_search();
+  std::tuple<State, int> uniform_cost_search();
 };
 
 #endif

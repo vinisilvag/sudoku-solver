@@ -31,10 +31,10 @@ int main(int argc, char *argv[])
       tie(solution, expansions) = graph->breadth_first_search();
       break;
     case 'I':
-      std::cout << "Iterative deepening search\n";
+      tie(solution, expansions) = graph->iterative_deepening_search();
       break;
     case 'U':
-      std::cout << "Uniform-cost search\n";
+      tie(solution, expansions) = graph->uniform_cost_search();
       break;
     case 'A':
       std::cout << "A* search\n";
@@ -43,8 +43,8 @@ int main(int argc, char *argv[])
       std::cout << "Greedy best-first search\n";
       break;
     default:
-      std::cout << "Unknown algorithm: " << *algorithm << ".\n";
-      std::exit(1);
+      std::cerr << "Unknown algorithm: " << *algorithm << ".\n";
+      return EXIT_FAILURE;
   }
   auto end = std::chrono::high_resolution_clock::now();
   int time =

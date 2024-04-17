@@ -7,12 +7,14 @@ class Node
 {
  public:
   State state;
-  int cost = 0;
-  int depth = 0;
+  int cost;
+  int depth;
 
-  Node(State, int);
+  Node(State, int, int);
   bool goal();
   std::vector<Node*> expand();
+
+  bool operator<(const Node& node);
 };
 
 #endif
