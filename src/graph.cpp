@@ -74,17 +74,18 @@ std::tuple<State, int> Graph::uniform_cost_search()
     frontier;
   frontier.push(start);
 
-  // while (!frontier.empty()) {
-  //   Node *node = frontier.top();
-  //   frontier.pop();
-  //   expansions += 1;
+  while (!frontier.empty()) {
+    Node *node = frontier.top();
+    frontier.pop();
+    expansions += 1;
 
-  //   if (node->goal()) return {node->state, expansions};
+    if (node->goal()) return {node->state, expansions};
 
-  //   std::vector<Node *> children = node->expand();
-  //   for (Node *child : children) {
-  //     // update cost
-  //     frontier.push(child);
-  //   }
-  // }
+    std::vector<Node *> children = node->expand();
+    for (Node *child : children) {
+      // number of steps ?
+      child->cost = node->cost + 1;
+      frontier.push(child);
+    }
+  }
 }
