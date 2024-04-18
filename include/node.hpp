@@ -11,6 +11,7 @@ class Node
   int depth;
 
   Node(State, int, int);
+  ~Node();
   bool goal();
   std::vector<Node*> expand();
 

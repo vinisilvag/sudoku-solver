@@ -8,13 +8,13 @@
 
 Graph::Graph(State initial_state) { this->initial_state = initial_state; }
 
+Graph::~Graph() {}
+
 std::tuple<State, int> Graph::breadth_first_search()
 {
   int expansions = 0;
   Node *start = new Node(this->initial_state, 0, 0);
-  if (start->goal()) {
-    return {start->state, expansions};
-  }
+  if (start->goal()) return {start->state, expansions};
 
   std::queue<Node *> frontier;
   frontier.push(start);
@@ -30,14 +30,17 @@ std::tuple<State, int> Graph::breadth_first_search()
       frontier.push(child);
     }
   }
+
+  std::cerr << "Breadth-first Search failed to find the solution (should be "
+               "unreachable)\n";
+  std::exit(EXIT_FAILURE);
 }
+
 std::tuple<State, int> Graph::iterative_deepening_search()
 {
   int expansions = 0;
   Node *start = new Node(this->initial_state, 0, 0);
-  if (start->goal()) {
-    return {start->state, expansions};
-  }
+  if (start->goal()) return {start->state, expansions};
 
   int limit = 0;
 
@@ -60,15 +63,17 @@ std::tuple<State, int> Graph::iterative_deepening_search()
 
     limit += 1;
   }
+
+  std::cerr << "Iterative Deepening Search failed to find the solution (should "
+               "be unreachable)\n";
+  std::exit(EXIT_FAILURE);
 }
 
 std::tuple<State, int> Graph::uniform_cost_search()
 {
   int expansions = 0;
   Node *start = new Node(this->initial_state, 0, 0);
-  if (start->goal()) {
-    return {start->state, expansions};
-  }
+  if (start->goal()) return {start->state, expansions};
 
   std::priority_queue<Node *, std::vector<Node *>, std::greater<Node *>>
     frontier;
@@ -83,9 +88,25 @@ std::tuple<State, int> Graph::uniform_cost_search()
 
     std::vector<Node *> children = node->expand();
     for (Node *child : children) {
-      // number of steps ?
       child->cost = node->cost + 1;
       frontier.push(child);
     }
   }
+
+  std::cerr << "Uniform Cost Search failed to find the solution (should be "
+               "unreachable)\n";
+  std::exit(EXIT_FAILURE);
+}
+
+std::tuple<State, int> Graph::a_star_search()
+{
+  std::cerr << "A* failed to find the solution (should be unreachable)\n";
+  std::exit(EXIT_FAILURE);
+}
+
+std::tuple<State, int> Graph::greedy_best_first_search()
+{
+  std::cerr << "Greedy Best-first Search failed to find the solution (should "
+               "be unreachable)\n";
+  std::exit(EXIT_FAILURE);
 }

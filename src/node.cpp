@@ -7,6 +7,8 @@ Node::Node(State state, int depth = 0, int cost = 0)
   this->cost = cost;
 }
 
+Node::~Node() {}
+
 bool Node::operator<(const Node &node) { return this->cost < node.cost; }
 
 bool Node::goal()

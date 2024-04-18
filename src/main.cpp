@@ -1,4 +1,5 @@
 #include <chrono>
+#include <fstream>
 #include <iostream>
 #include <tuple>
 #include <vector>
@@ -9,6 +10,8 @@
 std::tuple<char *, State> parse_arguments(char *argv[]);
 
 void display_solution(State &);
+
+void dump_to_csv(int, int);
 
 int main(int argc, char *argv[])
 {
@@ -37,10 +40,10 @@ int main(int argc, char *argv[])
       tie(solution, expansions) = graph->uniform_cost_search();
       break;
     case 'A':
-      std::cout << "A* search\n";
+      tie(solution, expansions) = graph->a_star_search();
       break;
     case 'G':
-      std::cout << "Greedy best-first search\n";
+      tie(solution, expansions) = graph->greedy_best_first_search();
       break;
     default:
       std::cerr << "Unknown algorithm: " << *algorithm << ".\n";
@@ -50,10 +53,12 @@ int main(int argc, char *argv[])
   int time =
     std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 
-  std::cout << "time: " << time << "\n";
-  std::cout << "expansions: " << expansions << "\n";
-
+  std::cout << expansions << " " << time << "\n";
   display_solution(solution);
+
+  // dump_to_csv(expansions, time);
+
+  delete graph;
 
   return EXIT_SUCCESS;
 }
@@ -63,11 +68,8 @@ std::tuple<char *, State> parse_arguments(char *argv[])
   char *algorithm = argv[1];
   std::vector<std::vector<int>> initial_state(9, std::vector<int>(9));
 
-  for (int i = 0; i < 9; i++) {
-    for (int j = 0; j < 9; j++) {
-      initial_state[i][j] = argv[i + 2][j] - '0';
-    }
-  }
+  for (int i = 0; i < 9; i++)
+    for (int j = 0; j < 9; j++) initial_state[i][j] = argv[i + 2][j] - '0';
 
   return {algorithm, initial_state};
 }
@@ -75,9 +77,13 @@ std::tuple<char *, State> parse_arguments(char *argv[])
 void display_solution(State &state)
 {
   for (int i = 0; i < 9; i++) {
-    for (int j = 0; j < 9; j++) {
-      std::cout << state[i][j] << " ";
-    }
-    std::cout << "\n";
+    for (int j = 0; j < 9; j++) std::cout << state[i][j];
+    std::cout << " ";
   }
+  std::cout << "\n";
+}
+
+void dump_to_csv(int expansions, int time)
+{
+  std::cout << expansions << "," << time << "\n";
 }
