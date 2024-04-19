@@ -4,7 +4,7 @@
 #include <tuple>
 #include <vector>
 
-#include "graph.hpp"
+#include "search.hpp"
 #include "types.hpp"
 
 std::tuple<char *, State> parse_arguments(char *argv[]);
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
   }
 
   auto [algorithm, initial_state] = parse_arguments(argv);
-  Graph graph = Graph(initial_state);
+  Search search = Search(initial_state);
 
   State solution;
   int expansions;
@@ -31,19 +31,19 @@ int main(int argc, char *argv[])
   auto start = std::chrono::high_resolution_clock::now();
   switch (*algorithm) {
     case 'B':
-      tie(solution, expansions) = graph.breadth_first_search();
+      tie(solution, expansions) = search.breadth_first_search();
       break;
     case 'I':
-      tie(solution, expansions) = graph.iterative_deepening_search();
+      tie(solution, expansions) = search.iterative_deepening_search();
       break;
     case 'U':
-      tie(solution, expansions) = graph.uniform_cost_search();
+      tie(solution, expansions) = search.uniform_cost_search();
       break;
     case 'A':
-      tie(solution, expansions) = graph.a_star_search();
+      tie(solution, expansions) = search.a_star_search();
       break;
     case 'G':
-      tie(solution, expansions) = graph.greedy_best_first_search();
+      tie(solution, expansions) = search.greedy_best_first_search();
       break;
     default:
       std::cerr << "Unknown algorithm: " << *algorithm << ".\n";

@@ -1,4 +1,4 @@
-#include "graph.hpp"
+#include "search.hpp"
 
 #include <iostream>
 #include <queue>
@@ -6,11 +6,11 @@
 
 #include "node.hpp"
 
-Graph::Graph(State initial_state) { this->initial_state = initial_state; }
+Search::Search(State initial_state) { this->initial_state = initial_state; }
 
-Graph::~Graph() {}
+Search::~Search() {}
 
-std::tuple<State, int> Graph::breadth_first_search()
+std::tuple<State, int> Search::breadth_first_search()
 {
   int expansions = 0;
   Node start = Node(this->initial_state, 0, 0);
@@ -36,7 +36,7 @@ std::tuple<State, int> Graph::breadth_first_search()
   std::exit(EXIT_FAILURE);
 }
 
-std::tuple<State, int> Graph::iterative_deepening_search()
+std::tuple<State, int> Search::iterative_deepening_search()
 {
   int expansions = 0;
   Node start = Node(this->initial_state, 0, 0);
@@ -69,7 +69,7 @@ std::tuple<State, int> Graph::iterative_deepening_search()
   std::exit(EXIT_FAILURE);
 }
 
-std::tuple<State, int> Graph::uniform_cost_search()
+std::tuple<State, int> Search::uniform_cost_search()
 {
   int expansions = 0;
   Node start = Node(this->initial_state, 0, 0);
@@ -97,13 +97,13 @@ std::tuple<State, int> Graph::uniform_cost_search()
   std::exit(EXIT_FAILURE);
 }
 
-std::tuple<State, int> Graph::a_star_search()
+std::tuple<State, int> Search::a_star_search()
 {
   std::cerr << "A* failed to find the solution (should be unreachable)\n";
   std::exit(EXIT_FAILURE);
 }
 
-std::tuple<State, int> Graph::greedy_best_first_search()
+std::tuple<State, int> Search::greedy_best_first_search()
 {
   std::cerr << "Greedy Best-first Search failed to find the solution (should "
                "be unreachable)\n";
