@@ -13,9 +13,10 @@ class Node
   Node(State, int, int);
   ~Node();
   bool goal();
-  std::vector<Node*> expand();
+  std::vector<Node> expand();
 
-  bool operator<(const Node& node);
+  bool operator<(const Node& node) const;
+  bool operator>(const Node& node) const;
 };
 
 #endif

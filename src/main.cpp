@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
   }
 
   auto [algorithm, initial_state] = parse_arguments(argv);
-  Graph *graph = new Graph(initial_state);
+  Graph graph = Graph(initial_state);
 
   State solution;
   int expansions;
@@ -31,19 +31,19 @@ int main(int argc, char *argv[])
   auto start = std::chrono::high_resolution_clock::now();
   switch (*algorithm) {
     case 'B':
-      tie(solution, expansions) = graph->breadth_first_search();
+      tie(solution, expansions) = graph.breadth_first_search();
       break;
     case 'I':
-      tie(solution, expansions) = graph->iterative_deepening_search();
+      tie(solution, expansions) = graph.iterative_deepening_search();
       break;
     case 'U':
-      tie(solution, expansions) = graph->uniform_cost_search();
+      tie(solution, expansions) = graph.uniform_cost_search();
       break;
     case 'A':
-      tie(solution, expansions) = graph->a_star_search();
+      tie(solution, expansions) = graph.a_star_search();
       break;
     case 'G':
-      tie(solution, expansions) = graph->greedy_best_first_search();
+      tie(solution, expansions) = graph.greedy_best_first_search();
       break;
     default:
       std::cerr << "Unknown algorithm: " << *algorithm << ".\n";
@@ -57,8 +57,6 @@ int main(int argc, char *argv[])
   display_solution(solution);
 
   // dump_to_csv(expansions, time);
-
-  delete graph;
 
   return EXIT_SUCCESS;
 }

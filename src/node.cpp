@@ -9,7 +9,9 @@ Node::Node(State state, int depth = 0, int cost = 0)
 
 Node::~Node() {}
 
-bool Node::operator<(const Node &node) { return this->cost < node.cost; }
+bool Node::operator<(const Node &node) const { return this->cost < node.cost; }
+
+bool Node::operator>(const Node &node) const { return this->cost > node.cost; }
 
 bool Node::goal()
 {
@@ -19,9 +21,9 @@ bool Node::goal()
   return true;
 }
 
-std::vector<Node *> Node::expand()
+std::vector<Node> Node::expand()
 {
-  std::vector<Node *> children;
+  std::vector<Node> children;
 
   std::pair<int, int> coords = {-1, -1};
   for (int i = 0; i < 9 && coords.first == -1; i++) {
@@ -73,8 +75,8 @@ std::vector<Node *> Node::expand()
 
   for (int value : possibilities) {
     auto [i, j] = coords;
-    Node *child = new Node(this->state, this->depth + 1, 0);
-    child->state[i][j] = value;
+    Node child = Node(this->state, this->depth + 1, 0);
+    child.state[i][j] = value;
     children.push_back(child);
   }
 
