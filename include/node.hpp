@@ -15,8 +15,8 @@ class Node
   bool goal();
   std::vector<Node> expand();
 
-  bool operator<(const Node& node) const;
-  bool operator>(const Node& node) const;
+  bool operator<(const Node&) const;
+  bool operator>(const Node&) const;
 };
 
 #endif

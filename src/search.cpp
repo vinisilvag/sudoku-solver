@@ -92,14 +92,8 @@ std::tuple<State, int> Search::uniform_cost_search()
     }
   }
 
-  std::cerr << "Uniform Cost Search failed to find the solution (should be "
+  std::cerr << "Uniform-Cost Search failed to find the solution (should be "
                "unreachable)\n";
-  std::exit(EXIT_FAILURE);
-}
-
-std::tuple<State, int> Search::a_star_search()
-{
-  std::cerr << "A* failed to find the solution (should be unreachable)\n";
   std::exit(EXIT_FAILURE);
 }
 
@@ -107,5 +101,11 @@ std::tuple<State, int> Search::greedy_best_first_search()
 {
   std::cerr << "Greedy Best-first Search failed to find the solution (should "
                "be unreachable)\n";
+  std::exit(EXIT_FAILURE);
+}
+
+std::tuple<State, int> Search::a_star_search()
+{
+  std::cerr << "A* failed to find the solution (should be unreachable)\n";
   std::exit(EXIT_FAILURE);
 }
