@@ -53,10 +53,10 @@ int main(int argc, char *argv[])
   int time =
     std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 
-  std::cout << expansions << " " << time << "\n";
-  display_solution(solution);
+  // std::cout << expansions << " " << time << "\n";
+  // display_solution(solution);
 
-  // dump_to_csv(expansions, time);
+  dump_to_csv(expansions, time);
 
   return EXIT_SUCCESS;
 }
@@ -73,12 +73,13 @@ std::tuple<char *, State> parse_arguments(char *argv[])
 void display_solution(State &state)
 {
   for (int i = 0; i < 9; i++) {
-    for (int j = 0; j < 9; j++) std::cout << state[i][j] << " ";
-    std::cout << "\n";
+    for (int j = 0; j < 9; j++) std::cout << state[i][j];
+    std::cout << " ";
   }
   std::cout << "\n";
 }
 
+// auxiliary function to generate the .csv file
 void dump_to_csv(int expansions, int time)
 {
   std::cout << expansions << "," << time << "\n";
