@@ -39,9 +39,9 @@ std::tuple<State, int> Search::uniform_cost_search()
   Node start = Node(this->initial_state, 0, 0);
   if (start.is_goal()) return {start.state, expansions};
 
-  // max heap
+  // max heap with negative costs => min heap
   std::priority_queue<std::pair<int, Node>> frontier;
-  frontier.push({start.cost, start});
+  frontier.push({-start.cost, start});
 
   while (!frontier.empty()) {
     Node node = frontier.top().second;
@@ -51,7 +51,7 @@ std::tuple<State, int> Search::uniform_cost_search()
     if (node.is_goal()) return {node.state, expansions};
 
     std::vector<Node> children = node.expand();
-    for (Node child : children) frontier.push({child.cost, child});
+    for (Node child : children) frontier.push({-child.cost, child});
   }
 
   std::cerr << "Uniform-Cost Search failed to find a solution\n";

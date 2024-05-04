@@ -53,10 +53,10 @@ int main(int argc, char *argv[])
   int time =
     std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 
-  // std::cout << expansions << " " << time << "\n";
-  // display_solution(solution);
+  std::cout << expansions << " " << time << "\n";
+  display_solution(solution);
 
-  dump_to_csv(expansions, time);
+  // dump_to_csv(expansions, time);
 
   return EXIT_SUCCESS;
 }
