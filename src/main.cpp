@@ -33,17 +33,17 @@ int main(int argc, char *argv[])
     case 'B':
       tie(solution, expansions) = search.breadth_first_search();
       break;
-    case 'I':
-      tie(solution, expansions) = search.iterative_deepening_search();
-      break;
     case 'U':
       tie(solution, expansions) = search.uniform_cost_search();
       break;
-    case 'A':
-      tie(solution, expansions) = search.a_star_search();
+    case 'I':
+      tie(solution, expansions) = search.iterative_deepening_search();
       break;
     case 'G':
       tie(solution, expansions) = search.greedy_best_first_search();
+      break;
+    case 'A':
+      tie(solution, expansions) = search.a_star_search();
       break;
     default:
       std::cerr << "Unknown algorithm: " << *algorithm << ".\n";
@@ -65,18 +65,16 @@ std::tuple<char *, State> parse_arguments(char *argv[])
 {
   char *algorithm = argv[1];
   std::vector<std::vector<int>> initial_state(9, std::vector<int>(9));
-
   for (int i = 0; i < 9; i++)
     for (int j = 0; j < 9; j++) initial_state[i][j] = argv[i + 2][j] - '0';
-
   return {algorithm, initial_state};
 }
 
 void display_solution(State &state)
 {
   for (int i = 0; i < 9; i++) {
-    for (int j = 0; j < 9; j++) std::cout << state[i][j];
-    std::cout << " ";
+    for (int j = 0; j < 9; j++) std::cout << state[i][j] << " ";
+    std::cout << "\n";
   }
   std::cout << "\n";
 }

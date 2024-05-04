@@ -1,5 +1,5 @@
 CC = g++
-CXXFLAGS = -std=c++20 -Wall
+CXXFLAGS = -std=c++17 -Wall
 TARGET = main
 
 BUILD_FOLDER := build

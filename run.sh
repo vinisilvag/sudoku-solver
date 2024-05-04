@@ -13,7 +13,7 @@ echo "Compiling done!"
 echo
 
 for algo in "${algorithms[@]}"; do
-  for i in easy medium hard; do
+  for i in 01 02 03; do
     echo "Running $i input on $algo algorithm..."
     output=$(./main ${algo} $(<./data/$i.in))
     echo "$i,$algo,$output" >> results/output.csv
