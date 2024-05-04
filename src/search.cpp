@@ -96,9 +96,9 @@ std::tuple<State, int> Search::greedy_best_first_search()
   Node start = Node(this->initial_state, 0, 0);
   if (start.is_goal()) return {start.state, expansions};
 
-  // max heap with h(n) inverted = min heap
+  // max heap with h(n) inverted => min heap
   std::priority_queue<std::pair<int, Node>> frontier;
-  frontier.push({-start.count_zeros(), start});
+  frontier.push({-start.count_possibilities(), start});
 
   while (!frontier.empty()) {
     Node node = frontier.top().second;
@@ -108,7 +108,8 @@ std::tuple<State, int> Search::greedy_best_first_search()
     if (node.is_goal()) return {node.state, expansions};
 
     std::vector<Node> children = node.expand();
-    for (Node child : children) frontier.push({-child.count_zeros(), child});
+    for (Node child : children)
+      frontier.push({-child.count_possibilities(), child});
   }
 
   std::cerr << "Greedy Best-first Search failed to find a solution\n";
@@ -121,9 +122,9 @@ std::tuple<State, int> Search::a_star_search()
   Node start = Node(this->initial_state, 0, 0);
   if (start.is_goal()) return {start.state, expansions};
 
-  // max heap
+  // max heap with f(n) = g(n) + h(n) inverted => min heap
   std::priority_queue<std::pair<int, Node>> frontier;
-  frontier.push({-(start.cost + start.count_possibilities()), start});
+  frontier.push({-(start.cost + start.count_zeros()), start});
 
   while (!frontier.empty()) {
     Node node = frontier.top().second;
@@ -134,7 +135,7 @@ std::tuple<State, int> Search::a_star_search()
 
     std::vector<Node> children = node.expand();
     for (Node child : children)
-      frontier.push({-(child.cost + child.count_possibilities()), child});
+      frontier.push({-(child.cost + child.count_zeros()), child});
   }
 
   std::cerr << "A* failed to find a solution\n";
