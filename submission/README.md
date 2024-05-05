@@ -19,9 +19,9 @@ make
 
 A saída esperada é composta por duas linhas, sendo a primeira composta pelo número de estados expandidos e o tempo de execução do algoritmo separados por vírgula e a segunda o estado final da grade completamente preenchida, no mesmo formato em que ela é passada como parâmetro.
 
-Além disso, o *bash script* que executa os experimentos também está sendo enviado nos arquivos. Para executá-lo é necessário que a pasta `results` exista no diretório, no mesmo nível das pastas `src` e `include`. Tanto essa pasta quanto a pasta `build` serão enviadas vazias no arquivo comprimido com o código e o relatório. 
+Além disso, o _bash script_ que executa os experimentos também está sendo enviado nos arquivos. Para executá-lo é necessário que a pasta `results` exista no diretório, no mesmo nível das pastas `src` e `include`. Tanto essa pasta quanto a pasta `build` serão enviadas vazias no arquivo comprimido com o código e o relatório.
 
-Para que a saída fique no formato adequado para um CSV, recomendo duas linhas sejam comentadas e que uma linha seja descomentada no final da função `main` no arquivo `main.cpp`. Assim, com a modificação, o final da função `main` deve passar a ser:
+Para que a saída fique no formato adequado para um CSV, recomendo que duas linhas sejam comentadas e que uma linha seja descomentada no final da função `main`, no arquivo `main.cpp`. Assim, com a modificação, o final da função `main` deve passar a ser:
 
 ```cpp
 int main(int argc, char *argv[])
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-Uma vez que tudo esteja correto, o *script* de testes pode ser executado com:
+Uma vez que tudo esteja correto, o _script_ de testes pode ser executado com:
 
 ```bash
 ./run.sh
