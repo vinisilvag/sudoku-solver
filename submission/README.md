@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-Uma vez que tudo esteja correto, o _script_ de testes pode ser executado com:
+Uma vez que tudo esteja correto e o programa tenha sido recompilado, o _script_ de testes pode ser executado com:
 
 ```bash
 ./run.sh
